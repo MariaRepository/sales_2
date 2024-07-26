@@ -7,25 +7,25 @@ from sklearn.linear_model import Lasso
 from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
 import numpy as np
 
+
 # os.chdir(os.path.dirname(__file__))
-
-
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
+root_path = '/home/mariaf/apis_taller_2024_07_23/'
 
 # Enruta la landing page (endpoint /)
 @app.route("/",methods=["GET"])
-def hello(): 
-    return "Bienvenido a la API de María"
+def hello():
+    return "Bienvenido a la API del modelo advertising"
 
 # Enruta la funcion al endpoint /api/v1/predict
 @app.route("/api/v1/predict",methods=["GET"])
 def predict():
     model=pickle.load(open('ad_model.pkl','rb'))
-    tv= request.args.get('tv',100)
-    radio= request.args.get('radio',500)
+    tv= request.args.get('tv',0)
+    radio= request.args.get('radio',0)
     newspaper= request.args.get('newspaper',0)
 
     print(tv,radio,newspaper)
